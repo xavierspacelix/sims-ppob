@@ -15,7 +15,7 @@ Follow these simple steps to get the application up and running on your local ma
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/juanakbar/sims-ppob.git
+   git clone https://github.com/xavierspacelix/sims-ppob.git
    ```
 
 2. **Navigate to the Project Directory**
