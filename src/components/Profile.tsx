@@ -40,9 +40,12 @@ const Profile = () => {
 
       const imageUrl = URL.createObjectURL(file);
       setImageSrc(imageUrl);
-      dispatch(uploadProfileImage(formData) as any).unwrap();
-      const token = sessionStorage.getItem("token");
-      dispatch(fetchUserDetails(token as string)).unwrap();
+      dispatch(uploadProfileImage(formData) as any)
+        .unwrap()
+        .then(() => {
+          const token = sessionStorage.getItem("token");
+          dispatch(fetchUserDetails(token as string)).unwrap();
+        });
     }
   };
 
