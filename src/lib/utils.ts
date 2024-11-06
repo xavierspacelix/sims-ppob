@@ -26,7 +26,7 @@ export function formatToWIB(dateString: any) {
   const month = months[date.getUTCMonth()];
   const year = date.getUTCFullYear();
 
-  const options = {
+  const options: Intl.DateTimeFormatOptions = {
     timeZone: "Asia/Jakarta",
     hour: "2-digit",
     minute: "2-digit",

@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/lib/srote";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "@/lib/srote";
 import defaultProfilePict from "../assets/Profile Photo.png";
 import { Pencil } from "lucide-react";
 import {
+  fetchUserDetails,
   logout,
   updateProfile,
   uploadProfileImage,
@@ -15,10 +16,10 @@ import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import { updateProfileSchema } from "@/features/auth/validationSchemas";
 const Profile = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
   const [editProfile, setEditProfile] = useState(false);
-  const [imageSrc, setImageSrc] = useState(defaultProfilePict);
+  const [imageSrc, setImageSrc] = useState(user?.profile_image);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [messageImage, setMessageImage] = useState("");
   const handleImageClick = () => {
@@ -39,8 +40,9 @@ const Profile = () => {
 
       const imageUrl = URL.createObjectURL(file);
       setImageSrc(imageUrl);
-
       dispatch(uploadProfileImage(formData) as any).unwrap();
+      const token = sessionStorage.getItem("token");
+      dispatch(fetchUserDetails(token as string)).unwrap();
     }
   };
 
@@ -86,11 +88,7 @@ const Profile = () => {
               aria-label="Change profile picture"
             >
               <img
-                src={
-                  user?.profile_image !== nullPicture
-                    ? user?.profile_image
-                    : defaultProfilePict
-                }
+                src={imageSrc === nullPicture ? defaultProfilePict : imageSrc}
                 alt="Profile picture"
                 width={96}
                 height={96}
