@@ -51,7 +51,11 @@ const History = () => {
                         : "text-green-600"
                     }`}
                   >
-                    {item?.total_amount}
+                    {Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      minimumFractionDigits: 0,
+                    }).format(item?.total_amount || 0)}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     {item?.description}
