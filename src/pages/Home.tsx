@@ -1,5 +1,5 @@
-import Banner from "@/components/banner";
-import Service from "@/components/service";
+import Banner from "@/components/Banner";
+import Service from "@/components/Service";
 import { logout } from "@/features/auth/authSlice";
 import store, { RootState } from "@/lib/srote";
 import { useDispatch, useSelector } from "react-redux";
