@@ -58,7 +58,7 @@ const Payment = () => {
           />
           <p className="font-semibold">{service?.service_name}</p>
         </div>
-        <div className="w-[50%] mt-3">
+        <div className="w-full mt-3">
           <div className="relative">
             <CreditCard
               className={"absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4"}
